@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <!-- This CSS package applies Google styling; it should always be included. -->
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+
+    <style>
+    label {
+      font-weight: bold;
+    }
+
+    .branding-below {
+      bottom: 0px;
+      top: 0;
+    }
+
+    .branding-text {
+      left: 7px;
+      position: relative;
+      top: 3px;
+    }
+
+    .logo {
+      vertical-align: middle;
+    }
+
+    .width-100 {
+      width: 100%;
+      box-sizing: border-box;
+      -webkit-box-sizing : border-box;‌
+      -moz-box-sizing : border-box;
+    }
+
+    .column {
+      float: left;
+    }
+
+    /* Clear floats after the columns */
+    .'sidebar bottom':after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+
+    #Month-Block,
+    #DayofMonth-Block,
+    #DayofWeek-Block,
+    #Destination-Block,
+    #DepDelay-Block,
+    #SchDepTime-Block,
+    #SchArrTime-Block,
+    #Duration-Block,
+    #TotalScheduled-Block,
+    #AvgSpeed-Block,
+    #Temperature-Block,
+    #Pressure-Block,
+    #Dew-Block,
+    #Humidity-Block,
+    #WindSpeed-Block,
+    #Wind-Block,
+    #Condition-Block,
+    #WindGust-Block,
+    #button-bar-1 {
+      background-color: #eee;
+      border-color: #fff;
+      border-width: 2px;
+      border-style: solid;
+      text-align: center;
+    }
+
+    #button-bar-1 {
+      margin-bottom: 10px;
+    }
+
+    .centerclass {
+      text-align: center;
+      font-size: 15px;
+    }
+    #sidebar-status {
+      text-align: center;
+    }
+
+    #DateContainer,
+    #FlightContainer1,
+    #FlightContainer2,
+    #ConditionContainer1,
+    #ConditionContainer2,
+    #ResultContainer {
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      width: 100%;
+      display: flex;
+      margin-bottom: 5px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #Month-Block,
+    #DepDelay-Block,
+    #Dew-Block {
+      width: 40%;
+      margin: 5px;
+    }
+    #DayofMonth-Block,
+    #Destination-Block,
+    #WindGust-Block {
+      width: 20%;
+    }
+    #DayofWeek-Block,
+    #TotalScheduled-Block,
+    #Humidity-Block {
+      width: 40%;
+      margin: 5px;
+    }
+    #Duration-Block,
+    #Temperature-Block {
+      width: 30%;
+      margin: 5px;
+    }
+    #SchDepTime-Block,
+    #Wind-Block {
+      width: 20%;
+      margin: 5px;
+    }
+    #SchArrTime-Block,
+    #Condition-Block {
+      width: 20%;
+      margin: 5px;
+    }
+    #AvgSpeed-Block,
+    #Pressure-Block {
+      width: 30%;
+      margin: 5px;
+    }
+    #button-bar-1,
+    #sidebar-status {
+      width: 50%;
+      margin: 5px;
+      font-weight: bold;
+    }
+    #sidebar-status {
+      color: blue;
+      font-size: 20px;
+    }
+
+    .blinking{
+        animation:blinkingText 1.2s infinite;
+    }
+    @keyframes blinkingText{
+        0%{     color: #0000FF;    }
+        49%{    color: #0000FF; }
+        85%{    color: transparent; }
+        99%{    color:transparent;  }
+        100%{   color: #0000FF;    }
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="sidebar branding-below">
+<form action='/p' method='POST'>
+      
+      <div class="centerclass"><label>Date information</label></div>
+      <div id="DateContainer">
+        <div id="Month-Block"> 
+          <label for="MonthValue">Month of Travel :</label><br>
+            <select name="MonthValue" id="MonthValue">
+              <option value="1">January</option>
+              <option value="0">November</option>
+              <option value="0.5">December</option>
+            </select>
+        </div>
+
+        <div id="DayofMonth-Block">
+          <label for="DayofMonthValue">Day of the month:</label><br>
+          <input type="number" id="DayofMonthValue" name="DayofMonthValue" min="1" max="31", value="10">
+        </div>
+
+        <div id="DayofWeek-Block"> 
+          <label for="DayofWeekValue">Day of Week :</label><br>
+            <select name="DayofWeekValue" id="DayofWeekValue">
+              <option value="1">Sunday</option>
+              <option value="2">Monday</option>
+              <option value="3">Tuesday</option>
+              <option value="4">Wednesday</option>
+              <option value="5">Thursday</option>
+              <option value="6">Friday</option>
+              <option value="7">Saturday</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="centerclass"><label>Flight information</label></div>
+      <div id="FlightContainer1">
+
+        <div id="Duration-Block"> 
+          <label for="DurationValue">Scheduled Duration (60 to 700 mins):</label><br>
+          <input type="range" id="DurationValue" name="DurationValue" min="60" max="700">
+        </div>
+
+        <div id="SchDepTime-Block"> 
+          <label for="SchDepTimeValue">Scheduled Departure Time :</label><br>
+          <input type="time" id="SchDepTimeValue" name="SchDepTimeValue", value="12:00">
+        </div>
+
+        <div id="SchArrTime-Block"> 
+          <label for="SchArrTimeValue">Scheduled Arrival Time :</label><br>
+          <input type="time" id="SchArrTimeValue" name="SchArrTimeValue", value="15:30">
+        </div>
+
+        <div id="AvgSpeed-Block"> 
+          <label for="AvgSpeedValue">Average Speed of Travel (60 to 450 mph):</label><br>
+          <input type="range" id="AvgSpeedValue" name="AvgSpeedValue" min="1" max="7.5" step="0.01">
+        </div>
+
+      </div>
+
+      <div id="FlightContainer2">
+
+        <div id="DepDelay-Block"> 
+          <label for="DepDelayValue">Delay in Departure Time (30 mins early to 60 mins Delay):</label><br>
+          <input type="range" id="DepDelayValue" name="DepDelayValue" min="-30" max="60">
+        </div>
+
+        <div id="Destination-Block"> 
+          <label for="DestiValue">Destination :</label><br>
+          <select name="DestiValue" id="DestiValue">
+              <option value="0.10382396">LAX</option>
+              <option value="0.05852417">SFO</option>
+              <option value="0.04282694">BOS</option>
+              <option value="0.03479913">FLL</option>
+              <option value="0.0330072">MCO</option>
+              <option value="0.03053435">MIA</option>
+              <option value="0.02996094">BUF</option>
+              <option value="0.02766728">ATL</option>
+              <option value="0.02734473">SJU</option>
+              <option value="0.02730889">CLT</option>
+              <option value="0.02630542">RDU</option>
+              <option value="0.02580368">LAS</option>
+              <option value="0.02361753">SEA</option>
+              <option value="0.02329499">PHX</option>
+              <option value="0.02307996">TPA</option>
+              <option value="0.02100133">ORD</option>
+              <option value="0.01960363">DCA</option>
+              <option value="0.01953195">SLC</option>
+              <option value="0.01795506">ROC</option>
+              <option value="0.01695158">AUS</option>
+              <option value="0.01695158">JAX</option>
+              <option value="0.01673655">PBI</option>
+              <option value="0.01662904">BTV</option>
+              <option value="0.01458625">SAN</option>
+              <option value="0.01401283">ORF</option>
+              <option value="0.01376196">MSY</option>
+              <option value="0.01361861">SYR</option>
+              <option value="0.01326022">DFW</option>
+              <option value="0.01311687">BWI</option>
+              <option value="0.01297352">CHS</option>
+              <option value="0.01268681">BNA</option>
+              <option value="0.01204172">PIT</option>
+              <option value="0.01200588">SAV</option>
+              <option value="0.01186252">DTW</option>
+              <option value="0.01143246">RIC</option>
+              <option value="0.01128911">MSP</option>
+              <option value="0.01096656">CLE</option>
+              <option value="0.01075153">CMH</option>
+              <option value="0.01067986">RSW</option>
+              <option value="0.00971222">IAD</option>
+              <option value="0.00921048">DEN</option>
+              <option value="0.00910296">IND</option>
+              <option value="0.00906713">PDX</option>
+              <option value="0.00881626">IAH</option>
+              <option value="0.00684514">CVG</option>
+              <option value="0.00655843">SJC</option>
+              <option value="0.00598502">PWM</option>
+              <option value="0.00576999">LGB</option>
+              <option value="0.00551912">SAT</option>
+              <option value="0.00458732">BUR</option>
+              <option value="0.00426477">BQN</option>
+              <option value="0.00369136">SRQ</option>
+              <option value="0.00354801">HNL</option>
+              <option value="0.00308211">ORH</option>
+              <option value="0.00290291">SMF</option>
+              <option value="0.00275956">ONT</option>
+              <option value="0.00272372">PSE</option>
+              <option value="0.00222198">PSP</option>
+              <option value="0.00218614">STT</option>
+              <option value="0.00211447">OAK</option>
+              <option value="0.00200695">ABQ</option>
+              <option value="0.00168441">PHL</option>
+              <option value="0.00164857">RNO</option>
+              <option value="0.00150521">EGE</option>
+              <option value="0.00017919">JAC</option>
+            </select>
+        </div>
+
+        <div id="TotalScheduled-Block"> 
+          <label for="TotalScheduledValue">Total Flights Scheduled on the day (1 to 85 flights):</label><br>
+          <input type="range" id="TotalScheduledValue" name="TotalScheduledValue" min="1" max="85">
+        </div>
+
+      </div>
+      
+      <div class="centerclass"><label>Weather information</label></div>
+      <div id="ConditionContainer1">
+        
+        <div id="Temperature-Block"> 
+          <label for="TemperatureValue">Temperature (20 to 65 degree Celcius):</label><br>
+          <input type="range" id="TemperatureValue" name="TemperatureValue" min="21" max="63" step="0.1">
+        </div>
+
+        <div id="Wind-Block"> 
+          <label for="WindValue">Wind Direction :</label><br>
+          <select name="WindValue" id="WindValue">
+            <option value="0.11307028">W</option>
+            <option value="0.10608178">NW</option>
+            <option value="0.09024119">WSW</option>
+            <option value="0.08733828">N</option>
+            <option value="0.08551052">NNW</option>
+            <option value="0.08386195">SW</option>
+            <option value="0.07002831">WNW</option>
+            <option value="0.06565602">S</option>
+            <option value="0.05823747">SSW</option>
+            <option value="0.04547898">NNE</option>
+            <option value="0.04006738">ENE</option>
+            <option value="0.03734365">NE</option>
+            <option value="0.03651937">E</option>
+            <option value="0.02985342">CALM</option>
+            <option value="0.01666487">ESE</option>
+            <option value="0.01232842">SE</option>
+            <option value="0.01121743">SSE</option>
+            <option value="0.01050066">VAR</option>
+          </select>
+        </div>
+
+        <div id="Condition-Block"> 
+          <label for="ConditionValue">Weather Condition :</label><br>
+          <select name="ConditionValue" id="ConditionValue">
+            <option value="0.32340609">Mostly Cloudy</option>
+            <option value="0.17750779">Cloudy</option>
+            <option value="0.17679103">Fair</option>
+            <option value="0.11192345">Partly Cloudy</option>
+            <option value="0.06633695">Light Rain</option>
+            <option value="0.04637494">Mostly Cloudy / Windy</option>
+            <option value="0.02716554">Fair / Windy</option>
+            <option value="0.01666487">Partly Cloudy / Windy</option>
+            <option value="0.01243594">Rain</option>
+            <option value="0.01093072">Cloudy / Windy</option>
+            <option value="0.008207">Light Rain / Windy</option>
+            <option value="0.00684514">Light Drizzle</option>
+            <option value="0.00526825">Fog</option>
+            <option value="0.00297459">Wintry Mix</option>
+            <option value="0.00265204">Light Snow</option>
+            <option value="0.0018636">Heavy Rain</option>
+            <option value="0.00082428">Light Snow / Windy</option>
+            <option value="0.00064509">Light Drizzle / Windy</option>
+            <option value="0.00064509">Rain / Windy</option>
+            <option value="0.00021503">Heavy Rain / Windy</option>
+            <option value="0.00014335">Wintry Mix / Windy</option>
+            <option value="0.00010752">Light Freezing Rain</option>
+            <option value="0.00007168">Snow</option>
+          </select>
+        </div>
+
+        <div id="Pressure-Block"> 
+          <label for="PressureValue">Pressure (29 to 31 bar):</label><br>
+          <input type="range" id="PressureValue" name="PressureValue" min="29" max="31" step="0.01">
+        </div>
+
+      </div>
+
+      <div id="ConditionContainer2">
+
+        <div id="Dew-Block"> 
+          <label for="DewValue">Dew Point (-1 to 60):</label><br>
+          <input type="range" id="DewValue" name="DewValue" min="-1" max="59" step="0.1">
+        </div>
+
+        
+<div id="WindGust-Block"> 
+          <label for="WindGustValue">Wind Gust :</label><br>
+            <select name="WindGustValue" id="WindGustValue">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+        </div>
+
+        <div id="Humidity-Block"> 
+          <label for="HumidityValue">Humidity (10 to 100):</label><br>
+          <input type="range" id="HumidityValue" name="HumidityValue" min="10" max="100" step="0.1">
+        </div>
+
+      </div>
+
+      <div id="WindSpeed-Block"> 
+        <label for="WindSpeedValue">Wind Speed (0 to 30 knots):</label><br>
+        <input type="range" id="WindSpeedValue" name="WindSpeedValue" min="0" max="28" step="0.1">
+      </div>
+
+      <div class="centerclass"><label>Prediction</label></div>
+      <div id="ResultContainer">
+
+        <div class="block form-group" id="button-bar-1">
+            <p> Click to predict the Taxi-Out time.</p>
+            <button id="Execute-Button">PREDICT</button>
+        </div>
+
+        <div class="blinking" id="sidebar-status"></div>
+<h2>			
+<b>{{pred}}</b>
+</h2>
+      </div>
+</form>
+    </div>
+
+  </body>
+</html>
